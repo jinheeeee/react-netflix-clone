@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
+
+// * debounce는 타이핑 끝났을 때 한번에 api호출
+// * debounce라는 함수에 의해서 사용자가 미리 결정된 시간동안 
+// * 타이핑을 멈출 때 까지 키업이벤트 처리를 지연시킴 (불필요한 api호출 수도 줄어듬)
 import { useDebounce } from "../../hooks/useDebounce";
 import "./SearchPage.css";
 
 export default function SearchPage() {
   const navigate = useNavigate();
+
   const [searchResults, setSearchResults] = useState([]);
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
